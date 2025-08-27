@@ -11,6 +11,15 @@ A lightweight demo combining **Semantic Kernel**, **LangChain SQL tools**, and *
 <img width="6825" height="1944" alt="MultiAgent Strucutred   Unstructured Data (SQL + AAIS) - Langchain (1)" src="https://github.com/user-attachments/assets/959df070-884d-40d5-8cde-55b28aeaa3ec" />
 
 
+### SQL Connection (Semantic Kernel Plugin with Langchain Tool) 
+To connect to SQL Database, the LangChain SQLAlchemy tool is wrapped as a Semantic Kernel plugin function. This exposes the SQL execution capability as a skill that the agent can invoke. The tool handles query execution against the connected Azure SQL Database, while Semantic Kernel provides the orchestration layer to call it when a user query requires structured data retrieval.
+
+The exposed function ```sql_retriever``` validates and executes read-only T-SQL ```SELECT``` statements against the ```TransactionTrades``` table in Azure SQL Database.
+- Tool: LangChain SQLDatabase (SQLAlchemy engine)
+- Function: ```run_sql_query```
+- Purpose: Executes validated queries and returns results as JSON objects ```([{"col": value, ...}, ...])```
+- Constraints: Only ```SELECT``` queries are allowed, and execution is restricted to the ```TransactionTrades``` table.
+  
 ### How it works 
 - Users ask questions in natural language.
 - The Router Agent examines the query:
@@ -45,9 +54,9 @@ A lightweight demo combining **Semantic Kernel**, **LangChain SQL tools**, and *
 
 │   └── ai_search.py           # AI Search plugin
 
-├── tests/                     # Optional: test scripts for connection, prompts, etc.
+├── tests/                     # Optional: test scripts for connection, sql plugin, etc.
 
-└── data/                      # Example data or prompt files (e.g. sql_agent_instructions.txt)
+└── data/                      # Example csv data to upload to sql database 
 
 ---
 
