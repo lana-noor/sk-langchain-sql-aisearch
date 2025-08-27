@@ -1,0 +1,18 @@
+# Azure OpenAI SDK Configuration
+AZURE_OPENAI_API_KEY=
+AZURE_OPENAI_API_VERSION='2025-01-01-preview'
+AZURE_OPENAI_ENDPOINT='https://<openai>.openai.azure.com/'
+AZURE_OPENAI_DEPLOYMENT='gpt-4.1'
+
+# Azure AI Search
+AZURE_SEARCH_SERVICE_ENDPOINT = "https://<service-name>.search.windows.net"
+AZURE_SEARCH_ADMIN_KEY = 
+AZURE_SEARCH_INDEX = "-index"
+
+# SQL Connection 
+SQL_SERVER=
+SQL_DATABASE=
+SQL_USER=
+SQL_PASSWORD=
+
+SQL_PROMPT = "./sql_connection/sql_prompt.txt"
