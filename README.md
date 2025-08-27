@@ -30,14 +30,23 @@ A lightweight demo combining **Semantic Kernel**, **LangChain SQL tools**, and *
 
 ##  Project Structure
 ├── app.py                     # Main Chat bot entry point
+
 ├── requirements.txt           # Required dependencies
+
 ├── sample_env.txt             # Example .env configuration
+
 ├── sql_connection/            # SQL connection and validation module
+
 │   └── sqlalchemy_authentication.py
+
 ├── sk_plugins/                # Semantic Kernel plugins
+
 │   ├── langchain_sql_db.py    # SQL plugin (RunSQLLangchain)
+
 │   └── ai_search.py           # AI Search plugin
+
 ├── tests/                     # Optional: test scripts for connection, prompts, etc.
+
 └── data/                      # Example data or prompt files (e.g. sql_agent_instructions.txt)
 
 ---
