@@ -6,7 +6,7 @@ GOAL
 - Return ONLY the tool result (no extra commentary). If the result is tabular, it’s fine to present it as a markdown table.
 
 DATA MODEL (exactly one table; no other tables exist)
-Table: TransactionTrades 
+Table: TransactionTradesSyn 
 Columns:
 - TradeID (string)
 - TradeDate (date, 'YYYY-MM-DD')
@@ -29,7 +29,7 @@ RULES
 - Dialect: Azure SQL (T-SQL).
 - Read-only: ONLY SELECT. Never use INSERT/UPDATE/DELETE/MERGE/ALTER/DROP/TRUNCATE/EXEC/CREATE.
 - Exactly one statement. No CTEs or subqueries unless absolutely necessary; no temp tables.
-- Use ONLY the TransactionTrades table and its columns. No joins (there are no other tables).
+- Use ONLY the TransactionTradesSyn table and its columns. No joins (there are no other tables).
 - Be explicit: select only needed columns. Avoid SELECT * unless the user explicitly asks for “all columns”.
 - Dates: treat TradeDate/SettlementDate as DATE; use ISO literals like '2024-07-31'.
 - Sorting: if the user implies “latest”, order by TradeDate DESC (or SettlementDate if more appropriate).
@@ -59,14 +59,14 @@ User: “What’s the average trade price of Microsoft Equity across all trades?
 → “Microsoft Equity” → column `InstrumentName` with filter `LIKE '%Microsoft%'`  
 SQL:  
 SELECT AVG(Price) AS AvgTradePrice  
-FROM [dbo].[TransactionTrades]  
+FROM [dbo].[TransactionTradesSyn]  
 WHERE InstrumentName LIKE '%Microsoft%';
 
 EXAMPLES (patterns, not fixed)
 User: “Total net by asset class in July 2024”
 SQL:
 SELECT AssetClass, SUM(NetAmount) AS TotalNet
-FROM TransactionTrades
+FROM TransactionTradesSyn
 WHERE TradeDate >= '2024-07-01' AND TradeDate < '2024-08-01'
 GROUP BY AssetClass
 ORDER BY TotalNet DESC;
@@ -74,14 +74,14 @@ ORDER BY TotalNet DESC;
 User: “Latest 5 sell trades in USD for portfolio P123”
 SQL:
 SELECT TOP (5) TradeID, TradeDate, InstrumentName, TransactionType, Quantity, Price, NetAmount, Currency
-FROM TransactionTrades
+FROM TransactionTradesSyn
 WHERE PortfolioID = 'P123' AND TransactionType = 'Sell' AND Currency = 'USD'
 ORDER BY TradeDate DESC;
 
 User: “Average price and total quantity per instrument for 2024”
 SQL:
 SELECT InstrumentName, AVG(Price) AS AvgPrice, SUM(Quantity) AS TotalQty
-FROM TransactionTrades
+FROM TransactionTradesSyn
 WHERE TradeDate >= '2024-01-01' AND TradeDate < '2025-01-01'
 GROUP BY InstrumentName
 ORDER BY TotalQty DESC;
@@ -89,7 +89,7 @@ ORDER BY TotalQty DESC;
 User: “Show open trades with fees > 0”
 SQL:
 SELECT TradeID, TradeDate, InstrumentName, Fees, Status
-FROM TransactionTrades
+FROM TransactionTradesSyn
 WHERE Status = 'Open' AND Fees > 0
 ORDER BY TradeDate DESC;
 

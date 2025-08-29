@@ -19,7 +19,7 @@ def test_connection():
     try:
         # Optional: check if Trades table is accessible
         with db._engine.connect() as conn:
-            result = conn.exec_driver_sql("SELECT TOP (1) * FROM TransactionTrades")
+            result = conn.exec_driver_sql("SELECT TOP (1) * FROM TransactionTradesSyn")
             row = result.fetchone()
             if row:
                 print("Trades table accessible! First row:")

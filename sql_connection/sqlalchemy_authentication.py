@@ -23,9 +23,9 @@ import re
 
 # Allow ONLY this table
 _ALLOWED_SCHEMA = "dbo"
-_ALLOWED_TABLE  = "TransactionTrades"
+_ALLOWED_TABLE  = "TransactionTradesSyn"
 
-# match [dbo].[TransactionTrades], dbo.TransactionTrades, TransactionTrades
+# match [dbo].[TransactionTradesSyn], dbo.TransactionTradesSyn, TransactionTradesSynSyn
 _TABLE_RX = re.compile(
     r"""\b(?:from|join)\s+
         (                           # capture table ref

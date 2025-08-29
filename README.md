@@ -14,11 +14,11 @@ A lightweight demo combining **Semantic Kernel**, **LangChain SQL tools**, and *
 ### SQL Connection (Semantic Kernel Plugin with Langchain Tool) 
 To connect to SQL Database, the LangChain SQLAlchemy tool is wrapped as a Semantic Kernel plugin function. This exposes the SQL execution capability as a skill that the agent can invoke. The tool handles query execution against the connected Azure SQL Database, while Semantic Kernel provides the orchestration layer to call it when a user query requires structured data retrieval.
 
-The exposed function ```sql_retriever``` validates and executes read-only T-SQL ```SELECT``` statements against the ```TransactionTrades``` table in Azure SQL Database.
+The exposed function ```sql_retriever``` validates and executes read-only T-SQL ```SELECT``` statements against the ```TransactionTradesSyn``` table in Azure SQL Database.
 - Tool: LangChain SQLDatabase (SQLAlchemy engine)
 - Function: ```run_sql_query```
 - Purpose: Executes validated queries and returns results as JSON objects ```([{"col": value, ...}, ...])```
-- Constraints: Only ```SELECT``` queries are allowed, and execution is restricted to the ```TransactionTrades``` table.
+- Constraints: Only ```SELECT``` queries are allowed, and execution is restricted to the ```TransactionTradesSyn``` table.
   
 ### How it works 
 - Users ask questions in natural language.
